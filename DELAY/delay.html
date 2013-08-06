@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>delay</title>
+</head>
+<body>
+    <script>
+        function a (callback) {
+            setTimeout(function (){
+                callback('a');
+            }, 3000);
+        }
+        function b (callback) {
+            setTimeout(function (){
+                callback('b');
+            },3000);
+        }
+        function c (callback) {
+            setTimeout( function () {
+                callback('c')
+            }, 3000);
+        }
+        function d (callback) {
+            setTimeout( function () {
+                callback('d')
+            }, 3000);
+        }
+        function e (callback) {
+            setTimeout( function () {
+                callback('e');
+                // throw new Error('Error')
+            }, 3000);
+        }
+        function f (callback) {
+            setTimeout( function () {
+                callback('f')
+            }, 3000);
+        }
+        function g (callback) {
+            setTimeout( function () {
+                callback('g')
+            }, 3000);
+        }
+    </script>
+    <script>
+        function delay (stack, callback){
+            var flag = 0, l = stack.length, result = [];
+            var aop = {
+                before : function (func, beforeDo, scope){
+                    func = func || function(){}
+                    func.flag
+                    beforeDo && beforeDo();
+                    func && func.call(scope || this);
+                },
+                after : function (func, afterDo, scope) {
+                    func && func.call(scope || this);
+                    afterDo && afterDo();
+                }
+            }
+
+            function say () {
+                alert('say');
+            }
+            aop.before(say, function(){
+                alert('before');
+            })
+            aop.after(say,
+                function(){
+                alert('end')
+            });
+            function call (flag){
+                if (flag === l){
+                    callback.apply(this, result);
+                }
+            }
+
+            for (var i = 0; i < l; ++i){
+                stack[i](aop(function(){}).after(function(){
+
+                }))
+                around(stack[i], function(func){
+                    func(function(data){
+
+                    });
+                })
+            }
+
+        }
+    </script>
+    <script>
+        var startTime1 = + new Date;
+        a(function(a){
+            b(function (b){
+                c(function (c){
+                    d(function (d){
+                        e(function (e){
+                            f(function (f){
+                                g(function (g){
+                                    console.log('a + b + c + d + e + f + g : ' + (a + b + c + d + e + f + g));
+                                    console.log('不使用delay,耗时' +(+new Date - startTime1));
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    </script>
+    <script>
+        var startTime2 = + new Date;
+        delay([a, b, c, d, e, f, g], function (a, b, c, d, e, f, g){
+            console.log('a + b + c + d + e + f + g: ' + (a + b + c + d + e + f + g));
+            console.log('使用delay,耗时' + (+new Date - startTime2));
+        });
+    </script>
+</body>
+</html>
