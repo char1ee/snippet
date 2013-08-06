@@ -82,15 +82,17 @@ JSON.stringify = function (o, undefined) {
 
 // test
 (function (objs) {
-    var obj;
+    var s,obj;
     for (var i = 0; i < objs.length; ++i) {
         obj = objs[i];
-        console.log(JSON.stringify(obj));
+        s = JSON.stringify(obj)
+        console.log(s);
         console.log(_JSON.stringify(obj));
-        console.warn(JSON.stringify(obj) === _JSON.stringify(obj));
+        console.warn(s === _JSON.stringify(obj));
         console.log('===========================================');
     }
 })([
+    [true, false, 1.5, 'hello world', [1,2,3], {a:1}],
     [1, 2, 3],
     [1, 2, "3", {a: 1, b: "2"}],
     [
