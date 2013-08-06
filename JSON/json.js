@@ -16,6 +16,16 @@ JSON.stringify = function (o, undefined) {
         return ({}).toString.call(o) === '[object ' + type + ']';
     }
 
+    function recurs(_o) {
+        if (is('Array', _o)) {
+            parseArray(_o);
+        } else if (is('Object', _o)) {
+            parseObject(_o);
+        } else {
+            return;
+        }
+    }
+
     function parseArray(arr) {
         s += '[';
         log('parseArray');
@@ -35,7 +45,7 @@ JSON.stringify = function (o, undefined) {
                     s += arr[i] + ',';
                 }
             } else {
-                loop(arr[i]);
+                recurs(arr[i]);
             }
         }
         s += '],';
@@ -57,28 +67,20 @@ JSON.stringify = function (o, undefined) {
                     log('Boolean: ' + obj[j]);
                     s += obj[j] + ',';
                 } else if (typeof obj[j] === 'object') {
-                    loop(obj[j]);
+                    recurs(obj[j]);
                 }
             }
         }
         s += '},';
     }
 
-    function loop(_o) {
-        if (is('Array', _o)) {
-            parseArray(_o);
-        } else if (is('Object', _o)) {
-            parseObject(_o);
-        } else {
-            return;
-        }
-    }
-
-    loop(o);
+    recurs(o);
     s = s.replace(/,(]|})/g, '$1').replace(/,$/, '');
     return s;
 };
 
+
+// test
 (function (objs) {
     var obj;
     for (var i = 0; i < objs.length; ++i) {
