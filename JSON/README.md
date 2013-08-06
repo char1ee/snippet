@@ -1,2 +1,3 @@
-==山寨了JSON.stringify函数==
+山寨了JSON.stringify函数
+=======================
 给废品ie67用的
