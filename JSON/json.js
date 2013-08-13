@@ -13,7 +13,7 @@ JSON.stringify = function (o, undefined) {
         console && console.log && console.log(msg);
     }
     function is(type, o) {
-        return ({}).toString.call(o) === '[object ' + type + ']';
+        return Object.prototype.toString.call(o) === '[object ' + type + ']';
     }
 
     function recurs(_o) {
