@@ -8,11 +8,13 @@
         }
 
         for (var i = 0; i < l; ++i){
-            stack[i](function(data){
-                result.push(data)
-                flag ++;
-                call(flag);
-            })
+            (function (k){
+                stack[k](function(data){
+                    result[k] = data;
+                    flag ++;
+                    call(flag);
+                })
+            })(i);
         }
 
     }
