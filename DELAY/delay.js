@@ -13,10 +13,9 @@
                     result[k] = data;
                     flag ++;
                     call(flag);
-                })
+                });
             })(i);
         }
-
     }
 
     exports.delay = delay;
