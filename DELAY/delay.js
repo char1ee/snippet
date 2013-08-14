@@ -8,9 +8,9 @@
         }
 
         for (var i = 0; i < l; ++i){
-            (function (k){
-                stack[k](function(data){
-                    result[k] = data;
+            (function (i){
+                stack[i](function(data){
+                    result[i] = data;
                     flag ++;
                     call(flag);
                 });
