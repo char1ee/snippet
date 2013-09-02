@@ -35,8 +35,8 @@
                 var _x = e.pageX - printer.offsetLeft,
                     _y = e.pageY - printer.offsetTop;
                 document.onmousemove = function (e) {
-                    printer.style.left = (e.pageX - _x) + 'px';
-                    printer.style.top = (e.pageY - _y) + 'px';
+                    printer.style.left = e.pageX - _x + 'px';
+                    printer.style.top  = e.pageY - _y + 'px';
                 }
                 document.onmouseup = function () {
                     _x =  _y =  document.onmousemove = null;
