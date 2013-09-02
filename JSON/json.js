@@ -29,7 +29,7 @@ JSON.stringify = JSON.stringify || function (o, undefined) {
             ) {
                 if (is('String', arr[i])) {
                     log('String : ' + arr[i]);
-                    s += '"' + arr[i].replace(/\"/g, '\\\"') + '"' + ',';
+                    s += '"' + arr[i].replace(/\"/g, '\\\"') + '",';
                 } else if (is('Number', arr[i])) {
                     log('Number: ' + arr[i]);
                     s += arr[i] + ',';
@@ -52,10 +52,10 @@ JSON.stringify = JSON.stringify || function (o, undefined) {
         log('parseObject');
         for (var j in obj) {
             if (obj.hasOwnProperty(j)) {
-                s += '"' + j + '"' + ':';
+                s += '"' + j + '":';
                 if (is('String', obj[j])) {
                     log('String : ' + obj[j]);
-                    s += '"' + obj[j].replace(/\"/g, '\\\"') + '"' + ',';
+                    s += '"' + obj[j].replace(/\"/g, '\\\"') + '",';
                 } else if (is('Number', obj[j])) {
                     log('Number: ' + obj[j]);
                     s += obj[j] + ',';
