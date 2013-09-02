@@ -1,29 +1,47 @@
+// 'use strict';
 (function (window) {
     var defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
     _console = window.console || {
         isNative: false,
         log: function (s) {
+            s = s == null ? {}.toString.call(s) : s.toString();
             var printer  = document.getElementById('char1ee-console');
             if(!printer) {
                 printer = document.createElement('div');
                 printer.id = 'char1ee-console';
+                printer.setAttribute('unselectable', 'on');
                 printer.style.cssText =
-                    'border:1px solid #ccc;'+
-                    'background:#eee;'+
-                    'position:absolute;'+
-                    'top:0;'+
-                    'right:0;'+
-                    'width:200px;'+
+                    'position:absolute;' +
+                    'z-index:999999;' +
+                    'top:0;' +
+                    'right:0;' +
+                    'width:200px;' +
                     'height:400px;'+
-                    'overflow:auto;'+
-                    'padding:5px;'+
-                    'z-index:999999;'+
-                    'font-size:10px;';
+                    'padding:5px;' +
+                    'background:#000;' +
+                    'color:#fff;' +
+                    'font-size:10px;' +
+                    'overflow:auto;' +
+                    '-webkit-user-select: none;' +
+                    '-moz-user-select: none;' +
+                    'user-select: none;' +
+                    'cursor:move';
                 document.body.appendChild(printer);
             }
             var item = document.createElement('div');
-            item.innerHTML = s.replace(/\n/g, '<br>');
+            item.innerHTML = s.toString().replace(/\n/g, '<br>');
             printer.appendChild(item);
+            printer.onmousedown = function (e) {
+                var _x = e.pageX - printer.offsetLeft,
+                    _y = e.pageY - printer.offsetTop;
+                document.onmousemove = function (e) {
+                    printer.style.left = (e.pageX - _x) + 'px';
+                    printer.style.top = (e.pageY - _y) + 'px';
+                }
+                document.onmouseup = function () {
+                    _x =  _y =  document.onmousemove = null;
+                }
+            }
         }
     };
 
