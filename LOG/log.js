@@ -1,5 +1,5 @@
 // 'use strict';
-(function (window) {
+(function (window, document) {
     var defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
     _console = window.console || {
         isNative: false,
@@ -70,4 +70,4 @@
         _console.log.apply(_console, tmp);
     }
     window.log = log;
-})(window);
+})(this, this.document);
