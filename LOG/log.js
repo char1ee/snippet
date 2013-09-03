@@ -1,73 +1,88 @@
 // 'use strict';
 (function (window, document) {
     var defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
-    _console = window.console || {
-        isNative: false,
-        log: function (s) {
-            s = s == null ? {}.toString.call(s) : s.toString();
-            var printer  = document.getElementById('char1ee-console');
-            if(!printer) {
-                printer = document.createElement('div');
-                printer.id = 'char1ee-console';
-                printer.setAttribute('unselectable', 'on');
-                printer.style.cssText =
-                    'position:absolute;' +
-                    'z-index:999999;' +
-                    'top:0;' +
-                    'right:0;' +
-                    'width:200px;' +
-                    'height:400px;'+
-                    'padding:5px;' +
-                    'background:#000;' +
-                    'color:#fff;' +
-                    'font-size:10px;' +
-                    'overflow:auto;' +
-                    '-webkit-user-select: none;' +
-                    '-moz-user-select: none;' +
-                    'user-select: none;' +
-                    'cursor:move';
-                document.body.appendChild(printer);
-            }
-            var item = document.createElement('div');
-            item.innerHTML = s.toString().replace(/\n/g, '<br>');
-            printer.appendChild(item);
-            printer.onmousedown = function (e) {
-                var _x = e.pageX - printer.offsetLeft,
-                    _y = e.pageY - printer.offsetTop;
-                document.onmousemove = function (e) {
-                    printer.style.left = e.pageX - _x + 'px';
-                    printer.style.top  = e.pageY - _y + 'px';
+        _console = window.console || {
+            isNative: false,
+            log: function (s) {
+                function is(type, o) {
+                    return type == 'Null' ? o === null :
+                    type == 'Undefined' ? typeof o == 'undefined':
+                    Object.prototype.toString.call(o) === '[object ' + type + ']';
                 }
-                document.onmouseup = function () {
-                    _x =  _y =  document.onmousemove = null;
-                }
-            }
-        }
-    };
+                s = is('Null', s) ? 'null' :
+                    is('Undefined', s) ? 'undefined' :
+                    is('String', s) ? '"' + s + '"' :
+                    is('Array', s) ? '[' + s.toString() + ']' :
+                    is('Object', s) ? (JSON.stringify(s)) :
+                    s.toString();
 
+                var printer  = document.getElementById('char1ee-console');
+                if (!printer) {
+                    printer = document.createElement('div');
+                    printer.id = 'char1ee-console';
+                    printer.setAttribute('unselectable', 'on');
+                    printer.style.cssText =
+                        'position:absolute;' +
+                        'z-index:999999;' +
+                        'top:0;' +
+                        'right:0;' +
+                        'width:200px;' +
+                        'height:400px;' +
+                        'padding:5px;' +
+                        'background:#000;' +
+                        'color:#fff;' +
+                        'font-size:12px;' +
+                        'overflow:auto;' +
+                        '-webkit-user-select: none;' +
+                        '-moz-user-select: none;' +
+                        'user-select: none;' +
+                        'cursor:move';
+                    document.body.appendChild(printer);
+                }
+                var item = document.createElement('div');
+                item.innerHTML = s.toString().replace(/\n/g, '<br>');
+                printer.appendChild(item);
+                printer.onmousedown = function () {
+                    var e = window.event;
+                    var _x = e.clientX - printer.offsetLeft,
+                        _y = e.clientY - printer.offsetTop;
+                    document.onmousemove = function () {
+                        var e = window.event;
+                        printer.style.left = e.clientX - _x + 'px';
+                        printer.style.top  = e.clientY - _y + 'px';
+                    };
+                    document.onmouseup = function () {
+                        _x =  _y =  document.onmousemove = null;
+                    };
+                };
+            }
+        };
     function random(m, n) {
         return 0 | Math.random() * (n - m) + m;
     }
 
     function log(s, colors) {
-        if(_console.isNative === false){
+        if (_console.isNative === false) {
             return _console.log(s);
         }
-        s = s || '';
         colors = colors || defaultColors;
-        var as = s.split(/\s+/),
-            al = as.length,
-            cl = colors.length,
-            tmp = [];
-        s = s.replace(/(^|\s+)/g, '$1%c');
-        for (var i = 0; al > i; ++i){
-            tmp.push(colors[random(0, cl)]);
+        if (typeof s == 'string') {
+            var as = s.split(/\s+/),
+                al = as.length,
+                cl = colors.length,
+                tmp = [];
+            s = s.replace(/(^|\s+)/g, '$1%c');
+            for (var i = 0; al > i; ++i) {
+                tmp.push(colors[random(0, cl)]);
+            }
+            tmp = tmp.map(function (s) {
+                return 'color:' + s;
+            });
+            tmp.unshift(s);
+            _console.log.apply(_console, tmp);
+            return;
         }
-        tmp = tmp.map(function (s) {
-            return 'color:' + s;
-        });
-        tmp.unshift(s);
-        _console.log.apply(_console, tmp);
+        _console.log(s);
     }
     window.log = log;
 })(this, this.document);

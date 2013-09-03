@@ -1,5 +1,6 @@
+window.JSON = window.JSON || {};
 JSON.parse = JSON.parse || function (s) {
-    return eval('(' + s +')');
+    return eval('(' + s + ')');
 };
 
 JSON.stringify = JSON.stringify || function (o, undefined) {
@@ -8,7 +9,9 @@ JSON.stringify = JSON.stringify || function (o, undefined) {
         // console && console.log && console.log(msg);
     }
     function is(type, o) {
-        return Object.prototype.toString.call(o) === '[object ' + type + ']';
+        return type == 'Null' ? o === null :
+               type == 'Undefined' ? typeof o == 'undefined':
+               Object.prototype.toString.call(o) === '[object ' + type + ']';
     }
 
     function recurs(_o) {

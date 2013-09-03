@@ -3,13 +3,33 @@
 <head>
     <title>log</title>
 </head>
-<body>
+<body style="height:5000px;">
 <script type="text/javascript">
 window.console = null;
 </script>
+<script type="text/javascript" src="../JSON/json.js"></script>
 <script type="text/javascript" src="log.js"></script>
 <script>
     log('数组是 ：' + 'hello world');
+    log(true);
+    log(false);
+    log({
+        a:{
+            b:[9,'15',{
+                c:7,
+                b:[9,'15',{
+                    c:7
+                }]
+            }]
+        }
+    });
+    log([1,2,3])
+    log(null);
+    log('string');
+    log(9);
+    log(09);
+    log();
+    log(undefined);
 </script>
 </body>
 </html>
