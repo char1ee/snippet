@@ -52,7 +52,7 @@
                         printer.style.top  = e.clientY - _y + 'px';
                     };
                     document.onmouseup = function () {
-                        document.onmousemove = null;
+                        document.onmousemove = document.onmouseup = null;
                     };
                 };
             }
