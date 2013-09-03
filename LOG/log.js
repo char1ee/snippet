@@ -6,8 +6,8 @@
             log: function (s) {
                 function is(type, o) {
                     return type == 'Null' ? o === null :
-                    type == 'Undefined' ? typeof o == 'undefined':
-                    Object.prototype.toString.call(o) === '[object ' + type + ']';
+                           type == 'Undefined' ? typeof o == 'undefined' :
+                           Object.prototype.toString.call(o) === '[object ' + type + ']';
                 }
                 s = is('Null', s) ? 'null' :
                     is('Undefined', s) ? 'undefined' :
