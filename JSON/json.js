@@ -1,4 +1,5 @@
 window.JSON = window.JSON || {};
+
 JSON.parse = JSON.parse || function (s) {
     return eval('(' + s + ')');
 };

@@ -10,6 +10,22 @@ window.console = null;
 <script type="text/javascript" src="../JSON/json.js"></script>
 <script type="text/javascript" src="log.js"></script>
 <script>
+    (function (arrs) {
+        for (var i = 0,l= arrs.length; l > i; ++i){
+            log(arrs[i] + '   ' + Object.prototype.toString.call(arrs[i]));
+        }
+    })([
+        'string',
+        true,
+        false,
+        1000,
+        null,
+        undefined,
+        function(){},
+        ['array'],
+        JSON,
+        {a:1,b:2,c:3}
+    ])
     log('数组是 ：' + 'hello world');
     log(true);
     log(false);
