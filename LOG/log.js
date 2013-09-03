@@ -33,9 +33,6 @@
                         'color:#fff;' +
                         'font-size:12px;' +
                         'overflow:auto;' +
-                        '-webkit-user-select: none;' +
-                        '-moz-user-select: none;' +
-                        'user-select: none;' +
                         'cursor:move';
                     document.body.appendChild(printer);
                 }
