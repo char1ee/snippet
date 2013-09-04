@@ -1,6 +1,7 @@
-(function (exports, window, document) {
+(function (exports, window) {
     // 'use strict';
-    var defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
+    var document = window.document,
+        defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
         _console = window.console || {
             isNative: false,
             log: function (s) {
@@ -83,4 +84,4 @@
         _console.log(s);
     }
     exports.log = log;
-})(this, this, this.document);
+})(this, this);
