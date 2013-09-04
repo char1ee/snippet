@@ -15,6 +15,14 @@ window.console = null;
             log(arrs[i] + '   ' + Object.prototype.toString.call(arrs[i]));
         }
     })([
+        document.body,
+        new Date,
+        new Error,
+        (function () {
+            return arguments;
+        })(1,2,3),
+        Math,
+        /\s/,
         'string',
         true,
         false,

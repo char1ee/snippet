@@ -1,19 +1,19 @@
-// 'use strict';
 (function (window, document) {
+    // 'use strict';
     var defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
         _console = window.console || {
             isNative: false,
             log: function (s) {
                 function is(type, o) {
-                    return type == 'Null' ? o === null :
-                           type == 'Undefined' ? typeof o == 'undefined' :
+                    return type === 'Null' ? o === null :
+                           type === 'Undefined' ? typeof o === 'undefined' :
                            Object.prototype.toString.call(o) === '[object ' + type + ']';
                 }
                 s = is('Null', s) ? 'null' :
                     is('Undefined', s) ? 'undefined' :
                     is('String', s) ? '"' + s + '"' :
                     is('Array', s) ? '[' + s.toString() + ']' :
-                    is('Object', s) ? (JSON.stringify(s)) :
+                    is('Object', s) ? JSON.stringify(s) :
                     s.toString();
 
                 var printer  = document.getElementById('char1ee-console');
@@ -54,6 +54,7 @@
                 };
             }
         };
+
     function random(m, n) {
         return 0 | Math.random() * (n - m) + m;
     }
@@ -63,7 +64,7 @@
             return _console.log(s);
         }
         colors = colors || defaultColors;
-        if (typeof s == 'string') {
+        if (typeof s === 'string') {
             var as = s.split(/\s+/),
                 al = as.length,
                 cl = colors.length,
