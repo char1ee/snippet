@@ -1,4 +1,4 @@
-(function (window, document) {
+(function (exports, window, document) {
     // 'use strict';
     var defaultColors = 'darkpink,blue,orange,darkgreen'.split(','),
         _console = window.console || {
@@ -82,5 +82,5 @@
         }
         _console.log(s);
     }
-    window.log = log;
-})(this, this.document);
+    exports.log = log;
+})(this, this, this.document);
