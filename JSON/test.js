@@ -14,6 +14,9 @@
     }
 })([
     'true',
+    'string\" string\"',
+    'string " string"',
+    "string \" string\"",
     true,
     false,
     10,

@@ -14,10 +14,8 @@ JSON.stringify = JSON.stringify || function (o, undefined) {
                type == 'Undefined' ? typeof o == 'undefined':
                Object.prototype.toString.call(o) === '[object ' + type + ']';
     }
-    s = is('String', o) ? '"' + o.toString() + '"' :
-        is('Boolean', o) ? o.toString() :
-        is('Number', o) ? o.toString() :
-        is('Null', o) ? o.toString() :
+    s = is('String', o) ? '"' + o.replace(/\"/g, '\\"') + '"' :
+        is('Boolean', o) || is('Number', o) || is('Null', o) ? o.toString() :
         s;
     function recurs(_o) {
         if (is('Array', _o)) {
@@ -37,7 +35,7 @@ JSON.stringify = JSON.stringify || function (o, undefined) {
             ) {
                 if (is('String', arr[i])) {
                     log('String : ' + arr[i]);
-                    s += '"' + arr[i].replace(/\"/g, '\\\"') + '",';
+                    s += '"' + arr[i].replace(/\"/g, '\\"') + '",';
                 } else if (is('Number', arr[i])) {
                     log('Number: ' + arr[i]);
                     s += arr[i] + ',';
