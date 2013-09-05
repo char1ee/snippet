@@ -6,10 +6,13 @@
 </head>
 <body>
     <script>
-        var _JSON = JSON;
+        var _JSON = window.JSON || {};
         JSON = {};
     </script>
+    <script src="../LOG/log.js"></script>
+
     <script src="json.js"></script>
+
     <script src="test.js"></script>
 </body>
 </html>

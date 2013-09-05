@@ -61,7 +61,7 @@ JSON.stringify = JSON.stringify || function (o, undefined) {
                 s += '"' + j + '":';
                 if (is('String', obj[j])) {
                     log('String : ' + obj[j]);
-                    s += '"' + obj[j].replace(/\"/g, '\\\"') + '",';
+                    s += '"' + obj[j].replace(/\"/g, '\\"') + '",';
                 } else if (is('Number', obj[j])) {
                     log('Number: ' + obj[j]);
                     s += obj[j] + ',';

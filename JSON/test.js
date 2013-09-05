@@ -1,16 +1,19 @@
 
 // test
 (function (objs) {
-    var s,obj;
+    var s, obj;
     for (var i = 0; i < objs.length; ++i) {
         obj = objs[i];
-        s = JSON.stringify(obj)
-        console.log(s);
-        console.log(_JSON.stringify(obj));
-        if(s !== _JSON.stringify(obj)){
-            console.warn(false)
+        s = JSON.stringify(obj);
+        if (s !== _JSON.stringify(obj)) {
+            log(s);
+            log(_JSON.stringify(obj));
+            console && console.warn && console.warn('%cwrong', 'color:#f00');
+            log('===========================================');
+        } else {
+            // log('ok');
+            // log('===========================================');
         }
-        console.log('===========================================');
     }
 })([
     'true',
@@ -23,15 +26,15 @@
     'string',
     NaN,
     Infinity,
-    {a:'你好'},
-    {a:"你好"},
-    {a:"你\"好"},
-    {a:'你"好'},
-    {a:'i\'am Jack'},
+    {a: '你好'},
+    {a: "你好"},
+    {a: "你\"好"},
+    {a: '你"好'},
+    {a: 'i\'am Jack'},
     ["aaaaaaaaaaa\"bbb\""],
     ['aaaaaaaaaaa"bbb"'],
-    {a:null},
-    [true, false, 1.5, 'hello world', [1,2,3], {a:1}],
+    {a: null},
+    [true, false, 1.5, 'hello world', [1, 2, 3], {a: 1}],
     [1, 2, 3],
     [1, 2, "3", {a: 1, b: "2"}],
     [
@@ -40,7 +43,7 @@
             b: "2",
             c: {
                 d: 3,
-                e: {'___': "4"},
+                e: {'___': "4"}
             }
         },
         {
@@ -48,7 +51,7 @@
             b: "2",
             c: {
                 d: 3,
-                e: {'___': "4"},
+                e: {'___': "4"}
             }
         }
     ],
@@ -181,9 +184,9 @@
             "jQuery",
             "Zepto",
             "$",
-            "define",
+            "define"
         ],
-        "indent"        : 4,        // Specify indentation spacing
+        "indent"        : 4        // Specify indentation spacing
     }
 
 ]);

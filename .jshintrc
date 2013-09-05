@@ -16,7 +16,7 @@
     "strict": false,
     "trailing": true,
     "camelcase": true,
-    "quotmark": true,
+    "quotmark": false,
     "asi": false,
     "boss": false,
     "debug": false,
