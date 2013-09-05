@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>delay</title>
+    <title>when</title>
 </head>
 <body>
     <script>
@@ -52,7 +52,7 @@
                             f(function (f){
                                 g(function (g){
                                     console.log('a + b + c + d + e + f + g : ' + (a + b + c + d + e + f + g));
-                                    console.log('不使用delay,耗时' +(+new Date - startTime1) + 'ms');
+                                    console.log('不使用when,耗时' +(+new Date - startTime1) + 'ms');
                                 })
                             })
                         })
@@ -61,12 +61,12 @@
             })
         })
     </script>
-    <script src="delay.js"></script>
+    <script src="when.js"></script>
     <script>
         var startTime2 = + new Date;
-        delay([a, b, c, d, e, f, g], function (a, b, c, d, e, f, g){
+        when([a, b, c, d, e, f, g], function (a, b, c, d, e, f, g){
             console.log('a + b + c + d + e + f + g: ' + (a + b + c + d + e + f + g));
-            console.log('使用delay,耗时' + (+new Date - startTime2) + 'ms');
+            console.log('使用when,耗时' + (+new Date - startTime2) + 'ms');
         });
     </script>
 </body>

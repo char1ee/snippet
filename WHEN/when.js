@@ -1,5 +1,5 @@
 (function (exports){
-    function delay (stack, callback){
+    function when (stack, callback){
         var flag = 0, l = stack.length, result = [];
         function call (flag){
            if (flag === l){
@@ -18,5 +18,5 @@
         }
     }
 
-    exports.delay = delay;
+    exports.when = when;
 })(this);
