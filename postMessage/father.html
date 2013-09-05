@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>father</title>
+    <style>
+        iframe {width: 45%; height: 300px;margin-right: 10px;}
+    </style>
+</head>
+<body>
+i am father my location is <script>document.write(document.location.href)</script>
+<br>
+<iframe id="son1" src="http://127.0.0.1:8000/son1.html"></iframe>
+<iframe id="son2" src="http://192.168.1.50:8000/son2.html"></iframe>
+<div>
+    <textarea id="messageInput"></textarea>
+    <button id="btn1">send to son1</button>
+    <button id="btn2">send to son2</button>
+</div>
+<div id="printer"></div>
+<script src="shim.js"></script>
+<script src="messager.js"></script>
+<script>
+    var oForm = document.getElementById('form');
+        oMessageInput = document.getElementById('messageInput'),
+        oPrinter = document.getElementById('printer');
+</script>
+<script data-type="son1">
+    (function () {
+        var messagerWithSon1 = new Messager(document.getElementById('son1').contentWindow, '1');
+        messagerWithSon1.receive = function (data) {
+            oPrinter.innerHTML += 'this msg come form son1: ' + data + '<br>'
+        }
+        document.getElementById('btn1').onclick = function (e) {
+            var msg = oMessageInput.value.trim();
+            messagerWithSon1.post(msg);
+        }
+    })();
+</script>
+<script data-type="son2">
+    (function () {
+        var messagerWithSon2 = Messager(document.getElementById('son2').contentWindow, '2');
+        messagerWithSon2.receive = function (data) {
+            oPrinter.innerHTML += 'this msg come form son2: ' + data + '<br>'
+        }
+        document.getElementById('btn2').onclick = function (e) {
+            var msg = oMessageInput.value.trim();
+            messagerWithSon2.post(msg);
+        }
+    })();
+</script>
+</body>
+</html>

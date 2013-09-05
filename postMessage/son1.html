@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>son1</title>
+</head>
+<body>
+    i am son1 ,my location is <script> document.write(document.location.href)</script>
+    <form id="form">
+        <textarea id="messageInput"></textarea>
+        <button type="sublimt">send to father</button>
+    </form>
+    <div id="printer"></div>
+    <script src="shim.js"></script>
+    <script src="messager.js"></script>
+    <script>
+        var oForm = document.getElementById('form'),
+            oMessageInput = document.getElementById('messageInput'),
+            oPrinter = document.getElementById('printer');
+    </script>
+    <script>
+        (function () {
+            var messagerWithFather = new Messager(top, '1');
+            messagerWithFather.receive = function (data) {
+                oPrinter.innerHTML += data + '<br>'
+            }
+            oForm.onsubmit = function (e) {
+                var msg = oMessageInput.value.trim();
+                messagerWithFather.post(msg);
+                return false;
+            }
+        })();
+    </script>
+</body>
+</html>
