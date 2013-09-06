@@ -43,7 +43,7 @@
         }
     </script>
     <script>
-        var startTime1 = + new Date;
+        console.time('不使用when,耗时');
         a(function(a){
             b(function (b){
                 c(function (c){
@@ -52,7 +52,7 @@
                             f(function (f){
                                 g(function (g){
                                     console.log('a + b + c + d + e + f + g : ' + (a + b + c + d + e + f + g));
-                                    console.log('不使用when,耗时' +(+new Date - startTime1) + 'ms');
+                                    console.timeEnd('不使用when,耗时');
                                 })
                             })
                         })
@@ -63,10 +63,10 @@
     </script>
     <script src="when.js"></script>
     <script>
-        var startTime2 = + new Date;
+        console.time('使用when,耗时');
         when([a, b, c, d, e, f, g], function (a, b, c, d, e, f, g){
             console.log('a + b + c + d + e + f + g: ' + (a + b + c + d + e + f + g));
-            console.log('使用when,耗时' + (+new Date - startTime2) + 'ms');
+            console.timeEnd('使用when,耗时');
         });
     </script>
 </body>
